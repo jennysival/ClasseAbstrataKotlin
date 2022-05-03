@@ -83,14 +83,21 @@ class Loja {
     }
 
     private fun verificaEqualsTrue(){
+        var codigoIgual = false
+
         for(i: Int in listaDeProdutosCadastrados.indices){
             when(code){
                 listaDeProdutosCadastrados[i].codigoDeBarras -> {
                     if(listaDeProdutosCadastrados[i].equals(code)){
+                        codigoIgual = true
                         println("* Código de barras existente na loja *")
                     }
                 }
             }
+        }
+
+        if(!codigoIgual){
+            println("* Novo código de barras *")
         }
     }
 
@@ -120,19 +127,26 @@ class Loja {
         print("Digite o código de barras: ")
         val codigoDigitado = readln().toInt()
 
+        var codigoOk = 0
+
         for(i: Int in listaDeProdutosCadastrados.indices){
+
             when(codigoDigitado){
                 listaDeProdutosCadastrados[i].codigoDeBarras -> {
+                    codigoOk = 1
                     println("--------------------------------------")
                     println("Resultado da Busca = ${i+1}º produto: ")
                     listaDeProdutosCadastrados[i].mostrarDetalhesDoItem()
                 }
-//                else -> {
-//                    println("Produto não cadastrado")
-//                    buscarProdutoNaLista()
-//                }
             }
         }
+
+        if(codigoOk != 1){
+            println("------------------------------------------")
+            println("Código de barras não cadastrado no sistema")
+            buscarProdutoNaLista()
+        }
+
         menuInicial()
 
     }
