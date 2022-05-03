@@ -113,50 +113,50 @@ class Loja {
     }
 
     private fun exibirLista(){
-        println("-------- PRODUTOS CADASTRADOS --------")
-        listaDeProdutosCadastrados.forEach { produto ->
-            produto.mostrarDetalhesDoItem()
+        if(listaDeProdutosCadastrados.isEmpty()){
+            println("* Lista está vazia *")
         }
-
+        else{
+            println("-------- PRODUTOS CADASTRADOS --------")
+            listaDeProdutosCadastrados.forEach { produto ->
+                produto.mostrarDetalhesDoItem()
+            }
+        }
         menuInicial()
     }
 
     private fun buscarProdutoNaLista(){
-        println("Buscar produtos no estoque da loja")
-        println("----------------------------------")
-        print("Digite o código de barras: ")
-        val codigoDigitado = readln().toInt()
+        if(listaDeProdutosCadastrados.isEmpty()){
+            println("* Lista está vazia *")
+        }
+        else{
+            println("Buscar produtos no estoque da loja")
+            println("----------------------------------")
+            print("Digite o código de barras: ")
+            val codigoDigitado = readln().toInt()
 
-        var codigoOk = 0
+            var codigoOk = 0
 
-        for(i: Int in listaDeProdutosCadastrados.indices){
+            for(i: Int in listaDeProdutosCadastrados.indices){
 
-            when(codigoDigitado){
-                listaDeProdutosCadastrados[i].codigoDeBarras -> {
-                    codigoOk = 1
-                    println("--------------------------------------")
-                    println("Resultado da Busca = ${i+1}º produto: ")
-                    listaDeProdutosCadastrados[i].mostrarDetalhesDoItem()
+                when(codigoDigitado){
+                    listaDeProdutosCadastrados[i].codigoDeBarras -> {
+                        codigoOk = 1
+                        println("--------------------------------------")
+                        println("Resultado da Busca = ${i+1}º produto: ")
+                        listaDeProdutosCadastrados[i].mostrarDetalhesDoItem()
+                    }
                 }
             }
-        }
 
-        if(codigoOk != 1){
-            println("------------------------------------------")
-            println("Código de barras não cadastrado no sistema")
-            buscarProdutoNaLista()
+            if(codigoOk != 1){
+                println("------------------------------------------")
+                println("Código de barras não cadastrado no sistema")
+                buscarProdutoNaLista()
+            }
         }
-
         menuInicial()
 
     }
-
-
-
-//* função buscar produto na lista:
-//se eu adicionar else no meu when, o resultado vai sair diferente do que eu queria
-
-//* Em verificaEqualsTrue acontece a mesma coisa.
-// Se eu adicionar o else o resultado não sai como o esperado
 
 }
