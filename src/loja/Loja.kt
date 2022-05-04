@@ -135,13 +135,13 @@ class Loja {
             print("Digite o código de barras: ")
             val codigoDigitado = readln().toInt()
 
-            var codigoOk = 0
+            var codigoOk = false
 
             for(i: Int in listaDeProdutosCadastrados.indices){
 
                 when(codigoDigitado){
                     listaDeProdutosCadastrados[i].codigoDeBarras -> {
-                        codigoOk = 1
+                        codigoOk = true
                         println("--------------------------------------")
                         println("Resultado da Busca = ${i+1}º produto: ")
                         listaDeProdutosCadastrados[i].mostrarDetalhesDoItem()
@@ -149,9 +149,10 @@ class Loja {
                 }
             }
 
-            if(codigoOk != 1){
+            if(!codigoOk){
                 println("------------------------------------------")
                 println("Código de barras não cadastrado no sistema")
+                println("------------------------------------------")
                 buscarProdutoNaLista()
             }
         }
